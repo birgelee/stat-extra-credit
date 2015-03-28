@@ -19,19 +19,19 @@ namespace StatExtraCredit
             {
                 samples.Add((Math.Pow(Math.E, Statistics.qGetNormal(3, 1)) + Math.Pow(Math.E, Statistics.qGetNormal(3, 1)) + Math.Pow(Math.E, Statistics.qGetNormal(3, 1))) / 3);
             }
-            //Console.WriteLine("binning samples.");
+            Console.WriteLine("binning samples.");
             //Calculate histigram bins.
-            var binOcumations = Enumerable.Repeat(0.0, 500).ToList();
+            var binOcumations = Enumerable.Repeat(0.0, 200).ToList();
             foreach (double d in samples)
             {
                 var targetBin = (int)(d / binSize);
-                binOcumations[targetBin < binOcumations.Count ? targetBin : binOcumations.Count - 1]++;
+                if (targetBin < binOcumations.Count) binOcumations[targetBin]++;
             }
-            //Console.WriteLine("Sorting samples.");
+            Console.WriteLine("Sorting samples.");
             //Find 90th percentile.
             samples.Sort();
             var ninedyith = samples[(int)(sampleCount * .9)];
-            //Console.WriteLine("Done sorting samples.");
+            Console.WriteLine("Done sorting samples.");
 
             //Find 90th percentile assuming normal.
             var mean = samples.Average();
@@ -39,12 +39,12 @@ namespace StatExtraCredit
             var sd = Math.Sqrt(sumOfSquaresOfDifferences / sampleCount);
             var ninedyithFromNormal = Statistics.InverseFromPDF(Statistics.GenerateNormalPDF(mean, sd), .9, -20, 1.0 / 50000.0);
 
-            //Console.WriteLine("Actual 90th percentile: " + ninedyith);
-            //Console.WriteLine("Falsely predicted 90th percentile: " + ninedyithFromNormal);
+            Console.WriteLine("Actual 90th percentile: " + ninedyith);
+            Console.WriteLine("Falsely predicted 90th percentile: " + ninedyithFromNormal);
             //Console.WriteLine("Histigram bins: ");
             for (int i = 0; i < binOcumations.Count; i++)
             {
-                Console.WriteLine(binOcumations[i]);
+                //Console.WriteLine(binOcumations[i]);
             }
             Console.ReadLine();
         }

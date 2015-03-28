@@ -42,20 +42,25 @@ namespace StatExtraCredit
         public static double RandomFromPDFDx(PDF distributionFunction, double testingStart, double dx)
         {
             double targetRandom = r.NextDouble();
+            return InverseFromPDF(distributionFunction, targetRandom, testingStart, dx);
+        }
+
+        public static double InverseFromPDF(PDF distributionFunction, double probability, double testingStart, double dx)
+        {
             double sum = 0;
             int count = 0;
             while (true)
             {
                 sum += distributionFunction(testingStart + dx * count) * dx;
-                if (sum >= targetRandom)
+                if (sum >= probability)
                 {
                     return testingStart + dx * count;
                 }
 
                 count++;
-                if (count > 50000)
+                if (count > 5000000)
                 {
-                    Console.WriteLine("Did 50000 iterations and still did not find x.  Current x pos: " + count * dx + ", Target Area: " + targetRandom);
+                    Console.WriteLine("Did 5000000 iterations and still did not find x.  Current x pos: " + count * dx + ", Target Area: " + probability);
                     return 0;
                 }
             }
@@ -69,6 +74,23 @@ namespace StatExtraCredit
         {
             return RandomFromPDF(GenerateNormalPDF(mean, standardDeviation), -5 * standardDeviation, 5 * standardDeviation);
         }
+
+        public static double qGetNormal(double mean, double standardDeviation)
+        {
+            return mean + standardDeviation * qGetNormal();
+        }
+
+        // Get normal (Gaussian) random sample with mean 0 and standard deviation 1 (faster than get normal)
+        public static double qGetNormal()
+        {
+            // Use Box-Muller algorithm
+            double u1 = Statistics.r.NextDouble();
+            double u2 = Statistics.r.NextDouble();
+            double r = Math.Sqrt(-2.0 * Math.Log(u1));
+            double theta = 2.0 * Math.PI * u2;
+            return r * Math.Sin(theta);
+        }
+
 
         public static PDF GenerateNormalPDF(double mean, double standardDeviation)
         {

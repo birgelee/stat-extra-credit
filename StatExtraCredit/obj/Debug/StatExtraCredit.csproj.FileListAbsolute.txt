@@ -1,1 +1,6 @@
 C:\Users\Henry\OneDrive\Documents\GitHub\stat-extra-credit\StatExtraCredit\bin\Debug\StatExtraCredit.exe.config
+C:\Users\Henry\OneDrive\Documents\GitHub\stat-extra-credit\StatExtraCredit\bin\Debug\StatExtraCredit.exe
+C:\Users\Henry\OneDrive\Documents\GitHub\stat-extra-credit\StatExtraCredit\bin\Debug\StatExtraCredit.pdb
+C:\Users\Henry\OneDrive\Documents\GitHub\stat-extra-credit\StatExtraCredit\obj\Debug\StatExtraCredit.csprojResolveAssemblyReference.cache
+C:\Users\Henry\OneDrive\Documents\GitHub\stat-extra-credit\StatExtraCredit\obj\Debug\StatExtraCredit.exe
+C:\Users\Henry\OneDrive\Documents\GitHub\stat-extra-credit\StatExtraCredit\obj\Debug\StatExtraCredit.pdb
